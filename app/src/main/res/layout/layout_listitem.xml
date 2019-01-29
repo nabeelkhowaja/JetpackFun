@@ -18,7 +18,7 @@
                 bind:imageUrl='@{location.image, default="@mipmap/ic_launcher"}'
         />
         <TextView
-                android:text='@{location.name, default="Location Name"}'
+                android:text='@{"Location Name: " + location.name, default="Location Name"}'
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvLocationName"
@@ -26,14 +26,14 @@
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toEndOf="@+id/imageView"
                 android:layout_marginLeft="32dp" android:layout_marginStart="32dp"/>
         <TextView
-                android:text='@{String.valueOf(location.latitude), default="Latitude"}'
+                android:text='@{"Latitude: " + String.valueOf(location.latitude), default="Latitude"}'
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvLatitude" app:layout_constraintStart_toEndOf="@+id/tvLocationName"
                 app:layout_constraintTop_toTopOf="parent" android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"/>
         <TextView
-                android:text='@{String.valueOf(location.longitude), default="Longitude"}'
+                android:text='@{"Longitude: " +String.valueOf(location.longitude), default="Longitude"}'
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvLongitude" app:layout_constraintStart_toEndOf="@+id/tvLocationName"

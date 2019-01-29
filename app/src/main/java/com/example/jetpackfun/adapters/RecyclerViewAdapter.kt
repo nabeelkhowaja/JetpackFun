@@ -17,11 +17,9 @@ class RecyclerViewAdapter(private val items: List<Location>): RecyclerView.Adapt
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
-        holder.bind(items[position])
+        holder.bind(items.get(position))
         loadImage(holder.binding.imageView,items.get(position).image)
-        holder.binding.tvLocationName.setText("Location: ${items.get(position).name}")
-        holder.binding.tvLatitude.setText("Latitude: ${items.get(position).latitude}")
-        holder.binding.tvLongitude.setText("Longitude: ${items.get(position).longitude}")
+
     }
 
     inner class ViewHolder(val binding: LayoutListitemBinding) : RecyclerView.ViewHolder(binding.root){
