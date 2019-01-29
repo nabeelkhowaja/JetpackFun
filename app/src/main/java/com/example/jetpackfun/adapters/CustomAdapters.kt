@@ -5,7 +5,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 
 @BindingAdapter("imageUrl")
-fun loadImage(view: ImageView, imageUrl: String) {
+fun loadImage(view: ImageView, imageUrl: String?) {
     Glide.with(view.getContext())
         .asBitmap()
         .load(imageUrl)

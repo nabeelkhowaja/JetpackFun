@@ -6,6 +6,4 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 
 
-data class Location(val image: String, val name: String, val latitude: Float, val longitude: Float){
-
-}
+data class Location(val image: String, val name: String, val latitude: Float, val longitude: Float)
