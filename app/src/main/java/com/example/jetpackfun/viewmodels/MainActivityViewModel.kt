@@ -8,8 +8,9 @@ import com.example.jetpackfun.repositories.LocationRepository
 
 class MainActivityViewModel : ViewModel() {
 
-    var mLocations : MutableLiveData<List<Location>> = MutableLiveData()
-    init{
-            mLocations = LocationRepository.getLocations()
+    var mLocations: MutableLiveData<List<Location>> = MutableLiveData()
+
+    init {
+        mLocations = LocationRepository.getLocations()
     }
 }
