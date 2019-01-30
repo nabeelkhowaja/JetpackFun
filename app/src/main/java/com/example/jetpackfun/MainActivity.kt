@@ -2,6 +2,8 @@ package com.example.jetpackfun
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,27 +17,53 @@ import com.example.jetpackfun.viewmodels.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
-    lateinit var mainActivityViewModel: MainActivityViewModel
+    lateinit var mBinding: ActivityMainBinding
+    lateinit var mMainActivityViewModel: MainActivityViewModel
 
-    lateinit var adapter: RecyclerViewAdapter
-    lateinit var recyclerView: RecyclerView
+    lateinit var mAdapter: RecyclerViewAdapter
+    lateinit var mRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-        mainActivityViewModel.mLocations.observe(this, Observer { adapter.notifyDataSetChanged() })
+        mMainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        mMainActivityViewModel.mLocations.observe(this, Observer {
+            mAdapter.update(mMainActivityViewModel.mLocations.value.orEmpty())
+        })
+        mMainActivityViewModel.mIsUpdating.observe(this, Observer {
+            if (it) showProgressBar()
+            else {
+                hideProgressBar()
+                mRecyclerView.smoothScrollToPosition(mMainActivityViewModel.mLocations.value.orEmpty().size - 1)
+            }
+        })
 
         initRecyclerView();
-
+        mBinding.floatingActionButton.setOnClickListener() {
+            mMainActivityViewModel.addNewLocation(
+                Location(
+                    "https://c.tribune.com.pk/2016/03/1072545-mainsaddar-1459149578.jpg",
+                    "Karachi",
+                    24.4f,
+                    76.3f
+                )
+            )
+        }
     }
 
     private fun initRecyclerView() {
-        recyclerView = binding.recyclerView
-        adapter = RecyclerViewAdapter(mainActivityViewModel.mLocations.value.orEmpty())
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+        mRecyclerView = mBinding.recyclerView
+        mRecyclerView.layoutManager = LinearLayoutManager(this)
+        mAdapter = RecyclerViewAdapter(mMainActivityViewModel.mLocations.value.orEmpty())
+        mRecyclerView.adapter = mAdapter
+    }
+
+    private fun showProgressBar() {
+        mBinding.progressBar1.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        mBinding.progressBar1.visibility = View.GONE
     }
 }

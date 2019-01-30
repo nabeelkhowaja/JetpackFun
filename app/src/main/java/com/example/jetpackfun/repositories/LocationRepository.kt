@@ -8,6 +8,7 @@ object LocationRepository {
     val locations: MutableList<Location> = mutableListOf()
 
     fun getLocations(): MutableLiveData<List<Location>> {
+        locations.clear()
         addLocations()
         var data: MutableLiveData<List<Location>> = MutableLiveData()
         data.value = locations

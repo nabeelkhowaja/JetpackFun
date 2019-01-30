@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jetpackfun.databinding.LayoutListitemBinding
 import com.example.jetpackfun.models.Location
 
-class RecyclerViewAdapter(private val items: List<Location>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(private var items: List<Location>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -27,5 +27,10 @@ class RecyclerViewAdapter(private val items: List<Location>) : RecyclerView.Adap
             binding.location = item
             binding.executePendingBindings()
         }
+    }
+
+    fun update(locationItems:List<Location>){
+        items = locationItems
+        notifyDataSetChanged();
     }
 }
