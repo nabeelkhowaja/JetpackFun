@@ -18,7 +18,7 @@
                 bind:imageUrl='@{location.image, default="@mipmap/ic_launcher"}'
         />
         <TextView
-                android:text='@{"Location Name: " + location.name, default="Location Name"}'
+                android:text='@{"Name: " + location.name, default="Location Name"}'
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvLocationName"
