@@ -29,7 +29,7 @@ class RecyclerViewAdapter(private var items: List<Location>) : RecyclerView.Adap
         }
     }
 
-    fun update(locationItems:List<Location>){
+    fun update(locationItems: List<Location>) {
         items = locationItems
         notifyDataSetChanged();
     }
