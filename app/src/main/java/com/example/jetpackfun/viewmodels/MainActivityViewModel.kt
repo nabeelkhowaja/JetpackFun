@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.jetpackfun.models.Location
+import com.example.jetpackfun.network.RestClient
 import com.example.jetpackfun.repositories.LocationRepository
 import java.util.logging.Handler
 
@@ -21,7 +22,6 @@ class MainActivityViewModel : ViewModel() {
     fun addNewLocation(location: Location) {
         mIsUpdating.value = true;
         doAsync(location).execute()
-
     }
 
     internal inner class doAsync(location: Location) : AsyncTask<Void, Void, Void>() {
@@ -45,4 +45,8 @@ class MainActivityViewModel : ViewModel() {
             mIsUpdating.postValue(false)
         }
     }
+
+
+
+
 }
