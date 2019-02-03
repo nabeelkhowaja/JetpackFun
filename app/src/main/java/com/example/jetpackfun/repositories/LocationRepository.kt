@@ -4,52 +4,20 @@ import android.util.Log.d
 import androidx.lifecycle.MutableLiveData
 import com.example.jetpackfun.models.Location
 import com.example.jetpackfun.network.APIService
-import com.example.jetpackfun.network.OnResponseReceivedListener
+import com.example.jetpackfun.network.RestClient
+import com.example.jetpackfun.network.Result
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
 
 
 object LocationRepository {
 
-    val locations: MutableList<Location> = mutableListOf()
-
-    fun getLocations(): MutableLiveData<List<Location>> {
-        locations.clear()
-        addLocations()
-        var data: MutableLiveData<List<Location>> = MutableLiveData()
-        data.value = locations
-        return data
+    suspend fun getLocation() : Result<Location>{
+        return APIService.getLocation()
     }
 
-    fun addLocations() {
-        getCurrentLocation()
-//        locations.add(
-//            Location(
-//                Location.Area("https://c.tribune.com.pk/2016/03/1072545-mainsaddar-1459149578.jpg"),
-//                "Karachi",
-//                24.4f,
-//                76.3f
-//            )
-//        )
-//        locations.add(
-//            Location(
-//                Location.Area("https://c.tribune.com.pk/2016/03/1072545-mainsaddar-1459149578.jpg"),
-//                "Karachi",
-//                24.4f,
-//                76.3f
-//            )
-//        )
-    }
 
-    fun getCurrentLocation(){
-
-        APIService.fetchCurrentLocation(object : OnResponseReceivedListener{
-            override fun onSuccessReceived(response: Any?) {
-                locations.add(response as Location)
-            }
-
-            override fun onFailureReceived(errorMessage: String) {
-
-            }
-
-        })
-    }
 }

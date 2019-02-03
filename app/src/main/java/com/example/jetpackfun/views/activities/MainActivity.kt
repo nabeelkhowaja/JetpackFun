@@ -27,45 +27,36 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
         mMainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+
+        setObservers()
+        initRecyclerView();
+        setListeners();
+
+    }
+
+    fun setObservers() {
         mMainActivityViewModel.mLocations.observe(this, Observer {
             mAdapter.update(mMainActivityViewModel.mLocations.value.orEmpty())
         })
         mMainActivityViewModel.mIsUpdating.observe(this, Observer {
             if (it) showProgressBar()
-            else {
-                hideProgressBar()
-                //mRecyclerView.smoothScrollToPosition(mMainActivityViewModel.mLocations.value.orEmpty().size - 1)
-            }
+            else hideProgressBar()
         })
-
-        initRecyclerView();
-        mBinding.floatingActionButton.setOnClickListener() {
-            mMainActivityViewModel.addNewLocation(
-                Location(
-                    Location.Area(
-                        "https://c.tribune.com.pk/2016/03/1072545-mainsaddar-1459149578.jpg"),
-                        "Karachi",
-                        24.4f,
-                        76.3f
-                    )
-            )
-        }
     }
 
-    private fun initRecyclerView() {
+    fun initRecyclerView() {
         mRecyclerView = mBinding.recyclerView
         mRecyclerView.layoutManager = LinearLayoutManager(this)
         mAdapter = RecyclerViewAdapter(mMainActivityViewModel.mLocations.value.orEmpty())
         mRecyclerView.adapter = mAdapter
     }
 
-    private fun showProgressBar() {
-        mBinding.progressBar1.visibility = View.VISIBLE
+    fun setListeners() {
+        mBinding.floatingActionButton.setOnClickListener() { mMainActivityViewModel.addLocation() }
     }
 
-    private fun hideProgressBar() {
-        mBinding.progressBar1.visibility = View.GONE
-    }
+    fun showProgressBar() { mBinding.progressBar1.visibility = View.VISIBLE }
+
+    fun hideProgressBar() { mBinding.progressBar1.visibility = View.GONE }
 }

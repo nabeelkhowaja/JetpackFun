@@ -1,12 +1,22 @@
 package com.example.jetpackfun.viewmodels
 
 import android.os.AsyncTask
+import android.util.Log
+import android.util.Log.d
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.jetpackfun.models.Location
+import com.example.jetpackfun.network.APIService
 import com.example.jetpackfun.network.RestClient
+import com.example.jetpackfun.network.Result
 import com.example.jetpackfun.repositories.LocationRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
+import retrofit2.HttpException
 import java.util.logging.Handler
 
 class MainActivityViewModel : ViewModel() {
@@ -15,37 +25,28 @@ class MainActivityViewModel : ViewModel() {
     val mIsUpdating: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
-        mLocations = LocationRepository.getLocations()
         mIsUpdating.value = false
+        addLocation()
+
     }
 
-    fun addNewLocation(location: Location) {
-        mIsUpdating.value = true;
-        doAsync(location).execute()
+    fun addLocation() {
+        GlobalScope.launch(Dispatchers.Main) {
+            mIsUpdating.postValue(true)
+            val result = LocationRepository.getLocation()
+            when (result){
+                is Result.Success -> {
+                    var currentLocations : MutableList<Location> = mLocations.value.orEmpty().toMutableList()
+                    currentLocations.add(result.data)
+                    mLocations.postValue(currentLocations)
+                    mIsUpdating.postValue(false)
+
+                }
+            }
+
+        }
+
     }
-
-    internal inner class doAsync(location: Location) : AsyncTask<Void, Void, Void>() {
-
-        var location: Location
-
-        init {
-            this.location = location
-        }
-
-        override fun doInBackground(vararg params: Void?): Void? {
-            Thread.sleep(2000)
-            return null
-        }
-
-        override fun onPostExecute(result: Void?) {
-            super.onPostExecute(result)
-            var currentLocations: MutableList<Location> = mLocations.value.orEmpty().toMutableList()
-            currentLocations.add(location)
-            mLocations.postValue(currentLocations)
-            mIsUpdating.postValue(false)
-        }
-    }
-
 
 
 
