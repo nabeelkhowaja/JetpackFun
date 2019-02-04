@@ -2,7 +2,6 @@ package com.example.jetpackfun.views.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -12,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jetpackfun.R
 import com.example.jetpackfun.adapters.RecyclerViewAdapter
 import com.example.jetpackfun.databinding.ActivityMainBinding
-import com.example.jetpackfun.models.Location
-import com.example.jetpackfun.repositories.LocationRepository
 import com.example.jetpackfun.viewmodels.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
