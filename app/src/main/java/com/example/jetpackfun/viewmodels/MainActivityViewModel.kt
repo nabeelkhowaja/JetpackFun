@@ -1,5 +1,6 @@
 package com.example.jetpackfun.viewmodels
 
+import android.util.Log.d
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.jetpackfun.models.Location
@@ -7,6 +8,8 @@ import com.example.jetpackfun.network.OnResponseReceivedListener
 import com.example.jetpackfun.repositories.LocationRepository
 
 class MainActivityViewModel : ViewModel() {
+
+    val TAG: String = "MainActivityViewModel"
 
     var mLocations: MutableLiveData<List<Location>> = MutableLiveData()
     val mIsUpdating: MutableLiveData<Boolean> = MutableLiveData()
@@ -26,7 +29,10 @@ class MainActivityViewModel : ViewModel() {
                 mIsUpdating.postValue(false)
             }
 
-            override fun onFailureReceived(errorMessage: String?) {}
+            override fun onFailureReceived(errorMessage: String?) {
+                d(TAG, errorMessage)
+                mIsUpdating.postValue(false)
+            }
         })
     }
 }
