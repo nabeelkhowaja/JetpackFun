@@ -18,7 +18,7 @@ class MainActivityViewModel : ViewModel() {
 
     fun addLocation() {
         mIsUpdating.postValue(true)
-        LocationRepository.getLocation(object : OnResponseReceivedListener{
+        LocationRepository.getLocation(object : OnResponseReceivedListener {
             override fun onSuccessReceived(responseBody: Any?) {
                 var currentLocations: MutableList<Location> = mLocations.value.orEmpty().toMutableList()
                 currentLocations.add(responseBody as Location)

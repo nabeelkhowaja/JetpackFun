@@ -53,7 +53,11 @@ class MainActivity : AppCompatActivity() {
         mBinding.floatingActionButton.setOnClickListener() { mMainActivityViewModel.addLocation() }
     }
 
-    fun showProgressBar() { mBinding.progressBar1.visibility = View.VISIBLE }
+    fun showProgressBar() {
+        mBinding.progressBar1.visibility = View.VISIBLE
+    }
 
-    fun hideProgressBar() { mBinding.progressBar1.visibility = View.GONE }
+    fun hideProgressBar() {
+        mBinding.progressBar1.visibility = View.GONE
+    }
 }
