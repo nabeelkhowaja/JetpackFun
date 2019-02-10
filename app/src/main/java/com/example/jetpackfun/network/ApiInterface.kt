@@ -1,6 +1,6 @@
 package com.example.jetpackfun.network
 
-import com.example.jetpackfun.models.Location
+import com.example.jetpackfun.data.models.Location
 import retrofit2.Call
 import retrofit2.http.GET
 

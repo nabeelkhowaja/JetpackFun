@@ -1,8 +1,8 @@
-package com.example.jetpackfun.database
+package com.example.jetpackfun.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.jetpackfun.models.Location
+import com.example.jetpackfun.data.models.Location
 
 @Dao
 interface LocationDao {

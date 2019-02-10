@@ -29,12 +29,11 @@ class MainActivity : AppCompatActivity() {
         setObservers()
         initRecyclerView();
         setListeners();
-
     }
 
     fun setObservers() {
-        mMainActivityViewModel.mLocations.observe(this, Observer {
-            mAdapter.update(mMainActivityViewModel.mLocations.value.orEmpty())
+        mMainActivityViewModel.getAllLocations().observe(this, Observer {
+            mAdapter.update(mMainActivityViewModel.getAllLocations().value.orEmpty())
         })
         mMainActivityViewModel.mIsUpdating.observe(this, Observer {
             if (it) showProgressBar()
@@ -45,19 +44,13 @@ class MainActivity : AppCompatActivity() {
     fun initRecyclerView() {
         mRecyclerView = mBinding.recyclerView
         mRecyclerView.layoutManager = LinearLayoutManager(this)
-        mAdapter = RecyclerViewAdapter(mMainActivityViewModel.mLocations.value.orEmpty())
+        mAdapter = RecyclerViewAdapter(mMainActivityViewModel.getAllLocations().value.orEmpty())
         mRecyclerView.adapter = mAdapter
     }
 
-    fun setListeners() {
-        mBinding.floatingActionButton.setOnClickListener() { mMainActivityViewModel.addLocation() }
-    }
+    fun setListeners() { mBinding.floatingActionButton.setOnClickListener() { mMainActivityViewModel.addLocation() } }
 
-    fun showProgressBar() {
-        mBinding.progressBar1.visibility = View.VISIBLE
-    }
+    fun showProgressBar() { mBinding.progressBar1.visibility = View.VISIBLE }
 
-    fun hideProgressBar() {
-        mBinding.progressBar1.visibility = View.GONE
-    }
+    fun hideProgressBar() { mBinding.progressBar1.visibility = View.GONE }
 }

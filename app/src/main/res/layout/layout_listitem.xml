@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:bind="http://schemas.android.com/tools">
     <data>
-        <variable name="location" type="com.example.jetpackfun.models.Location"/>
+        <variable name="location" type="com.example.jetpackfun.data.models.Location"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"

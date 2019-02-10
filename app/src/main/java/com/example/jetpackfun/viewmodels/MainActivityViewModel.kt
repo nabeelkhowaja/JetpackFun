@@ -3,32 +3,30 @@ package com.example.jetpackfun.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import android.util.Log.d
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.jetpackfun.models.Location
+import com.example.jetpackfun.data.models.Location
 import com.example.jetpackfun.network.OnResponseReceivedListener
-import com.example.jetpackfun.repositories.LocationRepository
+import com.example.jetpackfun.data.repositories.LocationRepository
 
- class MainActivityViewModel(application: Application): AndroidViewModel(application) {
+class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
 
     val TAG: String = "MainActivityViewModel"
 
-    var mLocations: MutableLiveData<List<Location>> = MutableLiveData()
     val mIsUpdating: MutableLiveData<Boolean> = MutableLiveData()
-    var locationRepository : LocationRepository = LocationRepository(application)
+    var locationRepository: LocationRepository = LocationRepository(application)
+    private var allLocations: LiveData<List<Location>> = locationRepository.getAllLocations()
 
     init {
         mIsUpdating.value = false
     }
 
     fun addLocation() {
-        mIsUpdating.postValue(true)
+        mIsUpdating.value = true
         locationRepository.getLocation(object : OnResponseReceivedListener {
             override fun onSuccessReceived(response: Any?) {
-                var currentLocations: MutableList<Location> = mLocations.value.orEmpty().toMutableList()
-                currentLocations.add(response as Location)
-                mLocations.postValue(currentLocations)
                 mIsUpdating.postValue(false)
-                locationRepository.insert(response)
+                locationRepository.insert(response as Location)
             }
 
             override fun onFailureReceived(errorMessage: String?) {
@@ -36,5 +34,9 @@ import com.example.jetpackfun.repositories.LocationRepository
                 mIsUpdating.postValue(false)
             }
         })
+    }
+
+    fun getAllLocations(): LiveData<List<Location>>{
+        return allLocations
     }
 }

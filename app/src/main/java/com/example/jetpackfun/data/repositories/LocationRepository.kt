@@ -1,11 +1,11 @@
-package com.example.jetpackfun.repositories
+package com.example.jetpackfun.data.repositories
 
 import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
-import com.example.jetpackfun.database.LocationDao
-import com.example.jetpackfun.database.LocationDatabase
-import com.example.jetpackfun.models.Location
+import com.example.jetpackfun.data.JetpackDatabase
+import com.example.jetpackfun.data.LocationDao
+import com.example.jetpackfun.data.models.Location
 import com.example.jetpackfun.network.APIService
 import com.example.jetpackfun.network.OnResponseReceivedListener
 
@@ -16,7 +16,7 @@ class LocationRepository(application: Application){
     private var allLocation: LiveData<List<Location>>
 
     init {
-        val database: LocationDatabase = LocationDatabase.getInstance(
+        val database: JetpackDatabase = JetpackDatabase.getInstance(
             application.applicationContext
         )!!
         locationDao = database.locationDao()
@@ -30,6 +30,10 @@ class LocationRepository(application: Application){
 
     fun insert(location : Location) {
         insertAsyncTask(locationDao).execute(location)
+    }
+
+    fun getAllLocations() : LiveData<List<Location>>{
+        return allLocation
     }
 
     companion object {
