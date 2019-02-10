@@ -12,7 +12,6 @@ import com.example.jetpackfun.network.OnResponseReceivedListener
 class LocationRepository(application: Application){
 
     var locationDao: LocationDao
-
     private var allLocation: LiveData<List<Location>>
 
     init {
@@ -23,18 +22,11 @@ class LocationRepository(application: Application){
         allLocation = locationDao.getAllLocation()
     }
 
+    fun getLocation(listener: OnResponseReceivedListener) { APIService.getLocation(listener) }
 
-    fun getLocation(listener: OnResponseReceivedListener) {
-        APIService.getLocation(listener)
-    }
+    fun insert(location : Location) { insertAsyncTask(locationDao).execute(location) }
 
-    fun insert(location : Location) {
-        insertAsyncTask(locationDao).execute(location)
-    }
-
-    fun getAllLocations() : LiveData<List<Location>>{
-        return allLocation
-    }
+    fun getAllLocations() : LiveData<List<Location>>{ return allLocation }
 
     companion object {
         private class insertAsyncTask internal constructor(private val mAsyncTaskDao: LocationDao) :
@@ -46,6 +38,4 @@ class LocationRepository(application: Application){
             }
         }
     }
-
-
 }
