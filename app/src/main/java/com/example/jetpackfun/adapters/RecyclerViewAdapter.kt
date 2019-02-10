@@ -19,8 +19,8 @@ class RecyclerViewAdapter(private var items: List<Location>) : RecyclerView.Adap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items.get(position))
         //image  link contain svg file.. requires work.
-        loadImage(holder.binding.imageView, items.get(position).image.country_flag)
-
+        //loadImage(holder.binding.imageView, items.get(position).image.country_flag)
+        loadImage(holder.binding.imageView, "https://s-ec.bstatic.com/images/hotel/max1024x768/170/170835226.jpg")
     }
 
     inner class ViewHolder(val binding: LayoutListitemBinding) : RecyclerView.ViewHolder(binding.root) {
