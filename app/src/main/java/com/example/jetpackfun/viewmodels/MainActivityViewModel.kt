@@ -14,8 +14,8 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     val TAG: String = "MainActivityViewModel"
 
     val mIsUpdating: MutableLiveData<Boolean> = MutableLiveData()
-    var locationRepository: LocationRepository = LocationRepository(application)
-    private var allLocations: LiveData<List<Location>> = locationRepository.getAllLocations()
+    val locationRepository: LocationRepository = LocationRepository(application)
+    private val allLocations: LiveData<List<Location>> = locationRepository.getAllLocations()
 
     init {
         mIsUpdating.value = false

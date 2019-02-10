@@ -7,11 +7,11 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 data class Location(
-    @PrimaryKey(autoGenerate = true) var id:Int =0,
-    var country_name: String,
-    var latitude: Float,
-    var longitude: Float,
-    @SerializedName("location") @Embedded var image: Area
+    @PrimaryKey(autoGenerate = true) val id:Int =0,
+    val country_name: String,
+    val latitude: Float,
+    val longitude: Float,
+    @SerializedName("location") @Embedded val image: Area
 ) {
-    data class Area(var country_flag: String)
+    data class Area(val country_flag: String)
 }
