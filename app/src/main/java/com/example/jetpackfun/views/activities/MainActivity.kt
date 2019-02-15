@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jetpackfun.R
-import com.example.jetpackfun.adapters.RecyclerViewAdapter
+import com.example.jetpackfun.views.adapters.RecyclerViewAdapter
 import com.example.jetpackfun.databinding.ActivityMainBinding
 import com.example.jetpackfun.viewmodels.MainActivityViewModel
 

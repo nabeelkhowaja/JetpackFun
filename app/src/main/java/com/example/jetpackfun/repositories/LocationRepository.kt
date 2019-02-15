@@ -1,13 +1,13 @@
-package com.example.jetpackfun.data.repositories
+package com.example.jetpackfun.repositories
 
 import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
-import com.example.jetpackfun.data.JetpackDatabase
-import com.example.jetpackfun.data.LocationDao
-import com.example.jetpackfun.data.models.Location
-import com.example.jetpackfun.network.APIService
-import com.example.jetpackfun.network.OnResponseReceivedListener
+import com.example.jetpackfun.models.remote.JetpackDatabase
+import com.example.jetpackfun.models.remote.dao.LocationDao
+import com.example.jetpackfun.models.datamodels.Location
+import com.example.jetpackfun.models.remote.network.APIService
+import com.example.jetpackfun.models.remote.network.OnResponseReceivedListener
 
 class LocationRepository(application: Application){
 

@@ -1,6 +1,6 @@
-package com.example.jetpackfun.network
+package com.example.jetpackfun.models.remote.network
 
-import com.example.jetpackfun.data.models.Location
+import com.example.jetpackfun.models.datamodels.Location
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

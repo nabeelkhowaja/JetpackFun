@@ -1,10 +1,10 @@
-package com.example.jetpackfun.adapters
+package com.example.jetpackfun.views.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jetpackfun.databinding.LayoutListitemBinding
-import com.example.jetpackfun.data.models.Location
+import com.example.jetpackfun.models.datamodels.Location
 
 class RecyclerViewAdapter(private var items: List<Location>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 

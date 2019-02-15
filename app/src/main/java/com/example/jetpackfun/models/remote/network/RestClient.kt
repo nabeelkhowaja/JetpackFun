@@ -1,4 +1,4 @@
-package com.example.jetpackfun.network
+package com.example.jetpackfun.models.remote.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit

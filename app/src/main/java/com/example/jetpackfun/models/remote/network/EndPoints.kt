@@ -1,4 +1,4 @@
-package com.example.jetpackfun.network
+package com.example.jetpackfun.models.remote.network
 
 object EndPoints {
 

@@ -5,9 +5,9 @@ import androidx.lifecycle.AndroidViewModel
 import android.util.Log.d
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.jetpackfun.data.models.Location
-import com.example.jetpackfun.network.OnResponseReceivedListener
-import com.example.jetpackfun.data.repositories.LocationRepository
+import com.example.jetpackfun.models.datamodels.Location
+import com.example.jetpackfun.models.remote.network.OnResponseReceivedListener
+import com.example.jetpackfun.repositories.LocationRepository
 
 class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
 

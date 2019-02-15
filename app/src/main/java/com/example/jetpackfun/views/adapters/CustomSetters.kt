@@ -1,4 +1,4 @@
-package com.example.jetpackfun.adapters
+package com.example.jetpackfun.views.adapters
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
